@@ -20,9 +20,19 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //NOTE SERVER
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, './build')));
-// app.use(express.static(path.join(__dirname, '../build')));
+app.get("/home", (req, res, next) => {
+    res.redirect(`https://matching-try.herokuapp.com/home`);
+});
+app.get("/about", (req, res, next) => {
+    res.redirect(`https://matching-try.herokuapp.com/about`);
+});
+app.get("/all-campaigns", (req, res, next) => {
+    res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
+});
+app.get("/current-campaign", (req, res, next) => {
+    res.redirect(`https://matching-try.herokuapp.com/current-campaign`);
+});
 
 // app.use('/api/user', userRouter);
 app.use('/api/campaign', campaignRouter);
