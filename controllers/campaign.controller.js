@@ -1,9 +1,17 @@
 const Campaign = require('../models/campaign.model');
 const Company = require('../models/company.model');
 
+const findAllCampaignsWithFullPopulate= async ()=>{
+    return await Campaign.find().populate([{ path: 'company' },{ path: 'donations', populate: [{ path: 'card', populate: { path: 'gift' } },{ path: 'user' }] }, { path: 'cards', populate: { path: 'gift' } }]);;
+}
+
+const findCampaignWithFullPopulate= async (id)=>{
+    return await Campaign.findById(id).populate([{ path: 'company' },{ path: 'donations', populate: [{ path: 'card', populate: { path: 'gift' } },{ path: 'user' }] }, { path: 'cards', populate: { path: 'gift' } }]);;
+}
+
 const getAllCampaigns = async (req, res) => {
     try {
-        let allCampaigns = await Campaign.find().populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);
+        let allCampaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: campaign.controller.js ~ line 6 ~ getAllCampaigns ~ allCampaigns", allCampaigns);
         res.status(200).send(allCampaigns);
     }
@@ -15,7 +23,7 @@ const getAllCampaigns = async (req, res) => {
 
 const getCampaignById = async (req, res) => {
     try {
-        let campaign = await Campaign.findById(req.params.id).populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);;
+        let campaign = await findCampaignWithFullPopulate(req.params.id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 6 ~ getCampaignById ~ campaign", campaign)
         res.status(200).send(campaign);
     }
@@ -35,7 +43,7 @@ const createCampaign = async (req, res) => {
         else {
             ansCampaign = await new Campaign({ ...req.body }).save();
         }
-        let campaign = await Campaign.findById(ansCampaign._id).populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);;
+        let campaign = await findCampaignWithFullPopulate(ansCampaign._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 39 ~ createCampaign ~ campaign", campaign)
         res.status(200).send(campaign);
     }
@@ -61,6 +69,8 @@ const updateCampaign = async (req, res) => {
 }
 
 module.exports = {
+    findAllCampaignsWithFullPopulate,
+    findCampaignWithFullPopulate,
     getCampaignById,
     getAllCampaigns,
     createCampaign,
