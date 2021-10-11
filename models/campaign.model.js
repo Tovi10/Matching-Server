@@ -32,6 +32,10 @@ const campaignSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Donor',
     }],
+    donations: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Donation',
+    }],
     cards: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Card',

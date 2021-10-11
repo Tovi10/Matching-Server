@@ -4,10 +4,16 @@ const userSchema = mongoose.Schema({
     uid: {
         type: String,
     },
+    address: {
+        type: String,
+    },
     email: {
         type: String,
     },
-    password: {
+    phone: {
+        type: String,
+    },
+    name: {
         type: String,
     },
 })

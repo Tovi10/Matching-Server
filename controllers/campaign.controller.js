@@ -3,7 +3,7 @@ const Company = require('../models/company.model');
 
 const getAllCampaigns = async (req, res) => {
     try {
-        let allCampaigns = await Campaign.find().populate([{ path: 'company' }, { path: 'cards' }]);
+        let allCampaigns = await Campaign.find().populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);
         console.log("🚀 ~ file: campaign.controller.js ~ line 6 ~ getAllCampaigns ~ allCampaigns", allCampaigns);
         res.status(200).send(allCampaigns);
     }
@@ -15,7 +15,7 @@ const getAllCampaigns = async (req, res) => {
 
 const getCampaignById = async (req, res) => {
     try {
-        let campaign = await Campaign.findById(req.params.id).populate('cards');
+        let campaign = await Campaign.findById(req.params.id).populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);;
         console.log("🚀 ~ file: campaign.controller.js ~ line 6 ~ getCampaignById ~ campaign", campaign)
         res.status(200).send(campaign);
     }
@@ -35,7 +35,7 @@ const createCampaign = async (req, res) => {
         else {
             ansCampaign = await new Campaign({ ...req.body }).save();
         }
-        let campaign = await Campaign.findById(ansCampaign._id).populate([{ path: 'company' }, { path: 'cards' }]);;
+        let campaign = await Campaign.findById(ansCampaign._id).populate([{ path: 'company' },{ path: 'donations' }, { path: 'cards', populate: { path: 'gift' } }]);;
         console.log("🚀 ~ file: campaign.controller.js ~ line 39 ~ createCampaign ~ campaign", campaign)
         res.status(200).send(campaign);
     }
@@ -49,7 +49,9 @@ const updateCampaign = async (req, res) => {
     try {
         let updateCampaign = await Campaign.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: campaign.controller.js ~ line 50 ~ updateCampaign ~ updateCampaign", updateCampaign);
-        let campaign = await Campaign.findById(updateCampaign._id).populate([{ path: 'company' }, { path: 'cards' }]);;
+        let campaign = await Campaign.findById(updateCampaign._id).populate([{ path: 'company' },{ path: 'donations' }, {
+            path: 'cards', populate: { path: 'gift' }
+        }]);;
         res.status(200).send(campaign);
     }
     catch (error) {

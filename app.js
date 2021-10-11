@@ -14,6 +14,8 @@ const campaignRouter = require('./routes/campaign.route');
 const giftRouter = require('./routes/gift.route');
 const cardRouter = require('./routes/card.route');
 const companyRouter = require('./routes/company.route');
+const userRouter = require('./routes/user.route');
+const donationRouter = require('./routes/donation.route');
 
 app.use(express.static('public'));
 app.use(cors());
@@ -29,6 +31,8 @@ app.use('/api/campaign', campaignRouter);
 app.use('/api/gift', giftRouter);
 app.use('/api/card', cardRouter);
 app.use('/api/company', companyRouter);
+app.use('/api/user', userRouter);
+app.use('/api/donation', donationRouter);
 
 module.exports = {
     app, http
