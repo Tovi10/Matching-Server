@@ -16,6 +16,7 @@ const cardRouter = require('./routes/card.route');
 const companyRouter = require('./routes/company.route');
 const userRouter = require('./routes/user.route');
 const donationRouter = require('./routes/donation.route');
+const recruiterRouter=require('./routes/recruiter.route')
 
 app.use(express.static('public'));
 app.use(cors());
@@ -33,6 +34,7 @@ app.use('/api/card', cardRouter);
 app.use('/api/company', companyRouter);
 app.use('/api/user', userRouter);
 app.use('/api/donation', donationRouter);
+app.use('/api/recruiter', recruiterRouter);
 
 module.exports = {
     app, http

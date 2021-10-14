@@ -7,14 +7,14 @@ const recruiterSchema = mongoose.Schema({
     sumRaised: {
         type: String,default:0
     },
-    campaign: [{
+    campaign:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Campaign',
-    }],
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // },
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     donors: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Donor',
