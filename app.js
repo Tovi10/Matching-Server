@@ -30,7 +30,8 @@ app.get("*", (req, res, next) => {
     // if (req.url.includes("home")) {
     console.log("success@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
     // res.sendFile(path.join(__dirname, "./build/index.html"));
-    app.use(express.static(path.join(__dirname, './build')));
+    res.status(200).send(<h1>hello</h1>);
+    // app.use(express.static(path.join(__dirname, './build')));
 });
 // app.get("/all-campaigns", (req, res, next) => {
 //     res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
