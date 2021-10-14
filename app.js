@@ -45,7 +45,10 @@ app.get("/about", (req, res, next) => {
 app.get("/all-campaigns", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
-app.get("/curren-campaign/*", (req, res, next) => {
+// app.get("/curren-campaign", (req, res, next) => {
+//     res.sendFile(path.join(__dirname, "./build/index.html"));
+// });
+app.get("/curren-campaign/:currentCampaign", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 app.get("/create-campaign", (req, res, next) => {
@@ -57,7 +60,10 @@ app.get("/new-campaign", (req, res, next) => {
 app.get("/personal", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
-app.get("/gift-details/*", (req, res, next) => {
+// app.get("/gift-details", (req, res, next) => {
+//     res.sendFile(path.join(__dirname, "./build/index.html"));
+// });
+app.get("/gift-details/:currentGift", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 // app.get("/all-campaigns", (req, res, next) => {
