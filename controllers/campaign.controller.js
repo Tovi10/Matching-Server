@@ -1,12 +1,29 @@
 const Campaign = require('../models/campaign.model');
 const Company = require('../models/company.model');
 
-const findAllCampaignsWithFullPopulate= async ()=>{
-    return await Campaign.find().populate([{ path: 'company' },{ path: 'donations', populate: [{ path: 'card', populate: { path: 'gift' } },{ path: 'user' }] }, { path: 'cards', populate: { path: 'gift' } }]);;
+const findAllCampaignsWithFullPopulate = async () => {
+    return await Campaign.find().populate([{ path: 'company' },
+    {
+        path: 'donations',
+        populate: [{ path: 'card', populate: { path: 'gift' } }, { path: 'user' }]
+    },
+    {
+        path: 'recruiters',
+        populate: { path: 'user' }
+    },
+    { path: 'cards', populate: { path: 'gift' } }]);;
 }
 
-const findCampaignWithFullPopulate= async (id)=>{
-    return await Campaign.findById(id).populate([{ path: 'company' },{ path: 'donations', populate: [{ path: 'card', populate: { path: 'gift' } },{ path: 'user' }] }, { path: 'cards', populate: { path: 'gift' } }]);;
+const findCampaignWithFullPopulate = async (id) => {
+    return await Campaign.findById(id).populate([{ path: 'company' },
+    {
+        path: 'donations',
+        populate: [{ path: 'card', populate: { path: 'gift' } }, { path: 'user' }]
+    }, {
+        path: 'recruiters',
+        populate: { path: 'user' }
+    },
+    { path: 'cards', populate: { path: 'gift' } }]);;
 }
 
 const getAllCampaigns = async (req, res) => {
@@ -57,7 +74,7 @@ const updateCampaign = async (req, res) => {
     try {
         let updateCampaign = await Campaign.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: campaign.controller.js ~ line 50 ~ updateCampaign ~ updateCampaign", updateCampaign);
-        let campaign = await Campaign.findById(updateCampaign._id).populate([{ path: 'company' },{ path: 'donations' }, {
+        let campaign = await Campaign.findById(updateCampaign._id).populate([{ path: 'company' }, { path: 'donations' }, {
             path: 'cards', populate: { path: 'gift' }
         }]);;
         res.status(200).send(campaign);
