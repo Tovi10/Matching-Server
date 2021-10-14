@@ -48,7 +48,7 @@ app.get("/all-campaigns", (req, res, next) => {
 // app.get("/curren-campaign", (req, res, next) => {
 //     res.sendFile(path.join(__dirname, "./build/index.html"));
 // });
-app.get("/curren-campaign/:currentCampaign", (req, res, next) => {
+app.get("/current-campaign/:currentCampaign", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 app.get("/create-campaign", (req, res, next) => {
