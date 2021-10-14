@@ -60,33 +60,18 @@ app.get("/new-campaign", (req, res, next) => {
 app.get("/personal", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
-// app.get("/gift-details", (req, res, next) => {
-//     res.sendFile(path.join(__dirname, "./build/index.html"));
-// });
 app.get("/gift-details/:currentGift", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
-// app.get("/all-campaigns", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
-// });
-// app.get("/current-campaign/*", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/current-campaign`);
-// });
-// app.get("/gift-details/*", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/gift-details`);
-// });
-// app.get("/about", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/about`);
-// });
-// app.get("/new-campaign", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/new-campaign`);
-// });
-// app.get("/create-card", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/create-card`);
-// });
-// app.get("/create-gift", (req, res, next) => {
-//     res.redirect(`https://matching-try.herokuapp.com/create-gift`);
-// });
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 // app.use('/api/user', userRouter);
 app.use('/api/campaign', campaignRouter);
