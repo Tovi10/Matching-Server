@@ -26,11 +26,11 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './build')));
 // app.use(express.static(path.join(__dirname, '../build')));
 //NOTE SERVER
-app.get("*", (req, res, next) => {
+app.get("/", (req, res, next) => {
     // if (req.url.includes("home")) {
     console.log("success@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-    // res.sendFile(path.join(__dirname, "./build/index.html"));
-    res.status(200).send('<h1>hello</h1>');
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+    // res.status(200).send('<h1>hello</h1>');
     // app.use(express.static(path.join(__dirname, './build')));
 });
 // app.get("/all-campaigns", (req, res, next) => {
