@@ -26,30 +26,31 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './build')));
 // app.use(express.static(path.join(__dirname, '../build')));
 //NOTE SERVER
-app.get("/home", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/home`);
+app.get("/", (req, res, next) => {
+    if (req.url.includes("home"))
+        res.redirect(`https://matching-try.herokuapp.com/home`);
 });
-app.get("/all-campaigns", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
-});
-app.get("/current-campaign/*", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/current-campaign`);
-});
-app.get("/gift-details/*", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/gift-details`);
-});
-app.get("/about", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/about`);
-});
-app.get("/new-campaign", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/new-campaign`);
-});
-app.get("/create-card", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/create-card`);
-});
-app.get("/create-gift", (req, res, next) => {
-    res.redirect(`https://matching-try.herokuapp.com/create-gift`);
-});
+// app.get("/all-campaigns", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
+// });
+// app.get("/current-campaign/*", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/current-campaign`);
+// });
+// app.get("/gift-details/*", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/gift-details`);
+// });
+// app.get("/about", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/about`);
+// });
+// app.get("/new-campaign", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/new-campaign`);
+// });
+// app.get("/create-card", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/create-card`);
+// });
+// app.get("/create-gift", (req, res, next) => {
+//     res.redirect(`https://matching-try.herokuapp.com/create-gift`);
+// });
 
 // app.use('/api/user', userRouter);
 app.use('/api/campaign', campaignRouter);
