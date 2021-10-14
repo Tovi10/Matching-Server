@@ -27,8 +27,10 @@ app.use(express.static(path.join(__dirname, './build')));
 // app.use(express.static(path.join(__dirname, '../build')));
 //NOTE SERVER
 app.get("/", (req, res, next) => {
-    if (req.url.includes("home"))
+    if (req.url.includes("home")) {
+        console.log("success-----------------------------------------------------------")
         res.redirect(`https://matching-try.herokuapp.com/home`);
+    }
 });
 // app.get("/all-campaigns", (req, res, next) => {
 //     res.redirect(`https://matching-try.herokuapp.com/all-campaigns`);
