@@ -26,6 +26,53 @@ app.use(bodyParser.json());
 // app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, './build')));
 // app.use(express.static(path.join(__dirname, '../build')));
+//NOTE SERVER
+// app.get("/", (req, res, next) => {
+//     // if (req.url.includes("home")) {
+//     console.log("success@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+//     res.sendFile(path.join(__dirname, "./build/index.html"));
+//     // res.status(200).send('<h1>hello</h1>');
+//     // app.use(express.static(path.join(__dirname, './build')));
+// });
+app.get("/about", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/home", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/about", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/all-campaigns", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+// app.get("/curren-campaign", (req, res, next) => {
+//     res.sendFile(path.join(__dirname, "./build/index.html"));
+// });
+app.get("/current-campaign/:currentCampaign", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/create-campaign", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/new-campaign", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/personal", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/gift-details/:currentGift", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 // app.use('/api/user', userRouter);
 app.use('/api/campaign', campaignRouter);
