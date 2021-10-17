@@ -1,25 +1,58 @@
+const User = require("../models/user.model");
 const Recruiter = require("../models/recruiter.model");
-const Campaign = require("../models/campaign");
+const Campaign = require("../models/campaign.model");
+const nodemailer = require('nodemailer');
+
+const sendMail = (mailOptions) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'theflow.leader@gmail.com',
+            pass: 'theflow111'
+        }
+    });
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(`error: ${error}`);
+            throw Error('error in send mail')
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+}
 
 const createRecruiter = async (req, res) => {
     try {
-        const ansRecruiter = await new Recruiter(req.body).save();
-        console.log("🚀 ~ file: recruiter.controller.js ~ line 6 ~ createRecruiter ~ ansRecruiter", ansRecruiter);
-        const campaign = await Campaign.findByIdAndUpdate(req.params.campaignId, {
+        let user = await User.findOne({ email: req.body.email });
+        if (!user) {
+            user = await new User(req.body).save();
+        }
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 10 ~ createRecruiter ~ user", user)
+        const recruiter = await new Recruiter({ ...req.body, user: user._id }).save();
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 13 ~ createRecruiter ~ recruiter", recruiter._id)
+        const campaign = await Campaign.findByIdAndUpdate(req.body.campaign, {
             $push: {
-                "recruiters": ansRecruiter._id,
+                "recruiters": recruiter._id,
             }
         });
-        res.status(200).send({ ansRecruiter });
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 19 ~ createRecruiter ~ campaign", campaign)
+        // Send an email to the new recruiter with the details and send him a link that will contain the recruiter;
+        const mailOptions = {
+            to: req.body.email,
+            text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
+            text: `שלום ${req.body.name}`
+        }
+        // sendMail(mailOptions);
+        res.status(200).send({ recruiter });
     }
     catch (error) {
-        console.log("🚀 ~ file: recruiter.controller.js ~ line 10 ~ createRecruiter ~ error", error);
-        res.send({error});
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 24 ~ createRecruiter ~ error", error)
+        res.status(500).send({ error });
     }
 }
 
 
 
-export {
+module.exports = {
     createRecruiter,
 }

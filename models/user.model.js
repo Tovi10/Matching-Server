@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    campaigns:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Campaign'
+    }],
 })
 
 module.exports = mongoose.model('User', userSchema)
