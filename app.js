@@ -65,15 +65,6 @@ app.get("/personal", (req, res, next) => {
 app.get("/gift-details/:currentGift", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
-app.get("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "./build/index.html"));
-});
-app.get("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "./build/index.html"));
-});
-app.get("/", (req, res, next) => {
-    res.sendFile(path.join(__dirname, "./build/index.html"));
-});
 
 // app.use('/api/user', userRouter);
 app.use('/api/campaign', campaignRouter);
