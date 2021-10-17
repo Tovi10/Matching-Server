@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    allowed:{
+        type:Boolean,
+        default:0
+    },
     campaigns:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Campaign'
