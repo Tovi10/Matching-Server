@@ -7,8 +7,8 @@ const sendMail = (mailOptions) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'theflow.leader@gmail.com',
-            pass: 'theflow111'
+            user: 'leader.meet.mail@gmail.com',
+            pass: 'leadermeet123',
         }
     });
     transporter.sendMail(mailOptions, function (error, info) {
@@ -40,9 +40,10 @@ const createRecruiter = async (req, res) => {
         const mailOptions = {
             to: req.body.email,
             text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
+            // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
             text: `שלום ${req.body.name}`
         }
-        // sendMail(mailOptions);
+        sendMail(mailOptions);
         res.status(200).send({ recruiter });
     }
     catch (error) {
