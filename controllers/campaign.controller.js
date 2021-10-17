@@ -1,5 +1,6 @@
 const Campaign = require('../models/campaign.model');
 const Company = require('../models/company.model');
+const User = require('../models/user.model');
 
 const findAllCampaignsWithFullPopulate = async () => {
     return await Campaign.find().populate([{ path: 'company' },
@@ -52,6 +53,7 @@ const getCampaignById = async (req, res) => {
 const createCampaign = async (req, res) => {
     try {
         let ansCampaign;
+        // if company not exists:
         if (!req.body.company) {
             const newCompany = await new Company(req.body).save();
             console.log("🚀 ~ file: campaign.controller.js ~ line 30 ~ createCampaign ~ newCompany", newCompany);
@@ -60,9 +62,11 @@ const createCampaign = async (req, res) => {
         else {
             ansCampaign = await new Campaign({ ...req.body }).save();
         }
-        let campaign = await findCampaignWithFullPopulate(ansCampaign._id);
+        const user = await User.findByIdAndUpdate(req.body.userId, { $push: { campaigns: ansCampaign._id } });
+        console.log("🚀 ~ file: campaign.controller.js ~ line 66 ~ createCampaign ~ user", user)
+        const campaign = await findCampaignWithFullPopulate(ansCampaign._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 39 ~ createCampaign ~ campaign", campaign)
-        res.status(200).send(campaign);
+        res.status(200).send({campaign,user});
     }
     catch (error) {
         console.log("🚀 ~ file: campaign.controller.js ~ line 31 ~ createCampaign ~ error", error);
