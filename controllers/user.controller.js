@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 
 const getUserByUid = async (req, res) => {
     try {
-        let user = await User.findOne({ uid: req.params.uid });
+        let user = await User.findOne({ uid: req.params.uid }).populate({path:'campaigns'});
         console.log("🚀 ~ file: user.controller.js ~ line 7 ~ getUserByUid ~ user", user)
         if (!user) {
             const newUser = await new User(req.params).save();
