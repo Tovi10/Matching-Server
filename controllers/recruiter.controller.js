@@ -39,8 +39,8 @@ const createRecruiter = async (req, res) => {
         // Send an email to the new recruiter with the details and send him a link that will contain the recruiter;
         const mailOptions = {
             to: req.body.email,
-            text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
-            // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
+            // text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
+            text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
             text: `שלום ${req.body.name}`
         }
         sendMail(mailOptions);
@@ -51,8 +51,6 @@ const createRecruiter = async (req, res) => {
         res.status(500).send({ error });
     }
 }
-
-
 
 module.exports = {
     createRecruiter,
