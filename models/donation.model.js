@@ -5,12 +5,16 @@ const donationSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    recruiter: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Recruiter',
+    },
     card: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Card',
     },
-    date:{
-        type:String,
+    date: {
+        type: String,
     }
 })
 

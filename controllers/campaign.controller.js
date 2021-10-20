@@ -12,7 +12,7 @@ const findAllCampaignsWithFullPopulate = async () => {
         path: 'recruiters',
         populate: { path: 'user' }
     },
-    { path: 'cards', populate: { path: 'gift' } }]);;
+    { path: 'cards', populate: { path: 'gift' } }]);
 }
 
 const findCampaignWithFullPopulate = async (id) => {
@@ -66,7 +66,7 @@ const createCampaign = async (req, res) => {
         console.log("🚀 ~ file: campaign.controller.js ~ line 66 ~ createCampaign ~ user", user)
         const campaign = await findCampaignWithFullPopulate(ansCampaign._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 39 ~ createCampaign ~ campaign", campaign)
-        res.status(200).send({campaign,user});
+        res.status(200).send({ campaign, user });
     }
     catch (error) {
         console.log("🚀 ~ file: campaign.controller.js ~ line 31 ~ createCampaign ~ error", error);

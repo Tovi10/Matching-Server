@@ -5,9 +5,13 @@ const recruiterSchema = mongoose.Schema({
         type: Number,
     },
     sumRaised: {
-        type: String,default:0
+        type: String,
+        default: 0
     },
-    campaign:{
+    link: {
+        type: String,
+    },
+    campaign: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Campaign',
     },

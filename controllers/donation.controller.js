@@ -22,8 +22,19 @@ const createDonation = async (req, res) => {
 
 const getDonationsByRecruiterId = async (req, res) => {
     try {
-        let recruiterId = req.params.id;
-        let donations = await Donation.find({ user: recruiterId });
+        let recruiterId = req.params.recruiterId;
+        let donations = await Donation.find({ recruiter: recruiterId }).populate([
+            { path: 'user' },
+            {
+                path: 'recruiter',
+                populate: [{ path: 'user' }, { path: 'campaign' }]
+            },
+            {
+                path: 'card',
+                populate: { path: 'gift' }
+            }]);;
+        console.log("🚀 ~ file: donation.controller.js ~ line 27 ~ getDonationsByRecruiterId ~ donations", donations)
+        res.status(200).send(donations);
     }
     catch (error) {
         console.log("🚀 ~ file: donation.controller.js ~ line 29 ~ getDonationsByRecruiterId ~ error", error);
