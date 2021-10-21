@@ -8,6 +8,9 @@ const recruiterSchema = mongoose.Schema({
         type: String,
         default: 0
     },
+    designName: {
+        type: String,
+    },
     link: {
         type: String,
     },
