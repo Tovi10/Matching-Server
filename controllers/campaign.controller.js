@@ -76,11 +76,10 @@ const createCampaign = async (req, res) => {
 
 const updateCampaign = async (req, res) => {
     try {
-        let updateCampaign = await Campaign.findByIdAndUpdate(req.body._id, req.body);
+        const updateCampaign = await Campaign.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: campaign.controller.js ~ line 50 ~ updateCampaign ~ updateCampaign", updateCampaign);
-        let campaign = await Campaign.findById(updateCampaign._id).populate([{ path: 'company' }, { path: 'donations' }, {
-            path: 'cards', populate: { path: 'gift' }
-        }]);;
+        const campaign= await findCampaignWithFullPopulate(updateCampaign._id);
+        console.log("🚀 ~ file: campaign.controller.js ~ line 85 ~ updateCampaign ~ campaign", campaign)
         res.status(200).send(campaign);
     }
     catch (error) {

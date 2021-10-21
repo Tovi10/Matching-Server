@@ -95,4 +95,5 @@ module.exports = {
     createRecruiter,
     updateRecruiterDetails,
     getRecruiterById,
+    sendMail,
 }
