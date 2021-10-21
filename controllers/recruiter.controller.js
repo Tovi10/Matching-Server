@@ -37,13 +37,13 @@ const createRecruiter = async (req, res) => {
         });
         console.log("🚀 ~ file: recruiter.controller.js ~ line 19 ~ createRecruiter ~ campaign", campaign)
         // Send an email to the new recruiter with the details and send him a link that will contain the recruiter;
-        const mailOptions = {
-            to: req.body.email,
-            text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
-            // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
-            text: `שלום ${req.body.name}`
-        }
-        sendMail(mailOptions);
+        // const mailOptions = {
+        //     to: req.body.email,
+        //     text: ` you can share link http://localhost:3000/current-campaign/${campaign._id}`,
+        //     // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
+        //     text: `שלום ${req.body.name}`
+        // }
+        // sendMail(mailOptions);
         res.status(200).send({ recruiter });
     }
     catch (error) {
@@ -59,10 +59,15 @@ const updateRecruiterDetails = async (req, res) => {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 59 ~ updateRecruiterDetails ~ recruiter", recruiter);
         const mailOptions = {
             to: recruiter.user.email,
-            text: ` you can share link http://localhost:3000/current-campaign/${recruiter.campaign._id}`,
-            // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
-            text: `שלום ${recruiter.user.name}`,
-            text: `הלינק לאזור האישי שלך הוא : ${req.body.link}`
+            html: `<h3>שלום ${recruiter.user.name}</h3>
+            <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
+            <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
+            // html: `<h6>שלום ${recruiter.user.name}</h6>
+            // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
+            // <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
+            // // text: `אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
+            // text: `שלום ${recruiter.user.name}`,
+            // text: `והלינק לאזור האישי שלך הוא : ${req.body.link}`
         }
         sendMail(mailOptions);
         res.status(200).send({ recruiter });
