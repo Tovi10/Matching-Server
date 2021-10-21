@@ -14,7 +14,9 @@ const createApply = async (req, res) => {
             http://localhost:3000/management`
         }
         await sendMail(mailOptions);
-        res.status(200).send(apply);
+        const applies = await Apply.find({}).populate({ path: 'user' }).sort({status:1});
+        console.log("🚀 ~ file: apply.controller.js ~ line 18 ~ createApply ~ applies", applies)
+        res.status(200).send(applies);
     }
     catch (error) {
         res.status(500).send({ error });
@@ -23,7 +25,7 @@ const createApply = async (req, res) => {
 
 const getApplies = async (req, res) => {
     try {
-        const applies = await Apply.find({}).populate({ path: 'user' });
+        const applies = await Apply.find({}).populate({ path: 'user' }).sort({status:1});
         res.status(200).send(applies);
     }
     catch (error) {
@@ -45,7 +47,7 @@ const confirmApply = async (req, res) => {
         הבקשה המאושרת היא ${apply.text}`
         }
         await sendMail(mailOptions);
-        const applies = await Apply.find({}).populate({ path: 'user' });
+        const applies = await Apply.find({}).populate({ path: 'user' }).sort({status:1});
         console.log("🚀 ~ file: apply.controller.js ~ line 51 ~ confirmApply ~ applies", applies)
         res.status(200).send(applies);
     }
