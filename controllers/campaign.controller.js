@@ -29,7 +29,13 @@ const findCampaignWithFullPopulate = async (id) => {
 
 const getAllCampaigns = async (req, res) => {
     try {
-        let allCampaigns = await findAllCampaignsWithFullPopulate();
+        // edit all campaigns duration
+        // let c = await Campaign.find({});
+        // await c.forEach(cc => {
+        //     cc.duration = ['01/01/2021', '01/03/2021'];
+        //     cc.save();
+        // })
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: campaign.controller.js ~ line 6 ~ getAllCampaigns ~ allCampaigns", allCampaigns);
         res.status(200).send(allCampaigns);
     }
@@ -78,7 +84,7 @@ const updateCampaign = async (req, res) => {
     try {
         const updateCampaign = await Campaign.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: campaign.controller.js ~ line 50 ~ updateCampaign ~ updateCampaign", updateCampaign);
-        const campaign= await findCampaignWithFullPopulate(updateCampaign._id);
+        const campaign = await findCampaignWithFullPopulate(updateCampaign._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 85 ~ updateCampaign ~ campaign", campaign)
         res.status(200).send(campaign);
     }
