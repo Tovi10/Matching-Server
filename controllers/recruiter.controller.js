@@ -47,11 +47,33 @@ const createRecruiter = async (req, res) => {
         res.status(200).send({ recruiter });
     }
     catch (error) {
-        console.log("🚀 ~ file: recruiter.controller.js ~ line 24 ~ createRecruiter ~ error", error)
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 24 ~ createRecruiter ~ error", error);
+        res.status(500).send({ error });
+    }
+}
+
+const updateRecruiterDetails = async (req, res) => {
+    try {
+        let recruiterId = req.params.recruiterId;
+        let recruiter = await Recruiter.findByIdAndUpdate(recruiterId, { $set: { link: req.body.link } }).populate([{ path: 'user' }, { path: 'campaign' }]);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 59 ~ updateRecruiterDetails ~ recruiter", recruiter);
+        const mailOptions = {
+            to: recruiter.user.email,
+            text: ` you can share link http://localhost:3000/current-campaign/${recruiter.campaign._id}`,
+            // text: ` you can share link https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
+            text: `שלום ${recruiter.user.name}`,
+            text: `הלינק לאזור האישי שלך הוא : ${req.body.link}`
+        }
+        sendMail(mailOptions);
+        res.status(200).send({ recruiter });
+    }
+    catch (error) {
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 61 ~ updateRecruiterDetails ~ error", error);
         res.status(500).send({ error });
     }
 }
 
 module.exports = {
     createRecruiter,
+    updateRecruiterDetails,
 }
