@@ -1,4 +1,5 @@
 const Gift = require('../models/gift.model');
+const { sendMail } = require('./recruiter.controller');
 
 const getGiftById = async (req, res) => {
     try {
@@ -28,7 +29,20 @@ const getAllGifts = async (req, res) => {
 
 const createGift = async (req, res) => {
     try {
-        let ansGift = await new Gift(req.body).save();
+        let gift = req.body;
+        if (gift.from) {
+            const allCoupons = await Gift.find({ from: { $exists: true } });
+            const coupon = allCoupons.length + 1;
+            gift = { ...gift, coupon };
+            const mailOptions = {
+                to: gift.from,
+                subject: 'מתנה חדשה',
+                html: `<h3>קוד השובר הוא: ${gift.coupon}</h3>
+                השוברים ייחודיים ומופיעים בצורה הבאה ${gift.coupon}.XXX [מספר ייחודי לכל שימוש בשובר].`
+            }
+            await sendMail(mailOptions);
+        }
+        let ansGift = await new Gift(gift).save();
         console.log("🚀 ~ file: gift.controller.js ~ line 17 ~ createGift ~ ansGift", ansGift);
         res.status(200).send(ansGift);
     }

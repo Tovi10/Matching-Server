@@ -19,6 +19,12 @@ const giftSchema = mongoose.Schema({
     numOfUsed: {
         type: Number,
     },
+    from:{
+        type:String,
+    },
+    coupon:{
+        type:Number,
+    }
 })
 
 module.exports = mongoose.model('Gift', giftSchema)

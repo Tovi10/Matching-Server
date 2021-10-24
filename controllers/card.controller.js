@@ -38,8 +38,23 @@ const createCard = async (req, res) => {
     }
 }
 
+const updateCard = async (req, res) => {
+    try {
+        let updateCard = await Card.findByIdAndUpdate(req.body._id, req.body);
+        console.log("🚀 ~ file: card.controller.js ~ line 44 ~ updateCard ~ updateCard", updateCard)
+        let cards = await Card.find({});
+        console.log("🚀 ~ file: card.controller.js ~ line 46 ~ updateCard ~ cards", cards)
+        res.status(200).send(cards);
+    }
+    catch (error) {
+        console.log("🚀 ~ file: card.controller.js ~ line 50 ~ updateCard ~ error", error)
+        res.status(500).send({ error });
+    }
+}
+
 module.exports = {
     getCardById,
     getAllCards,
     createCard,
+    updateCard,
 };
