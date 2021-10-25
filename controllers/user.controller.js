@@ -5,12 +5,6 @@ const getUserByUid = async (req, res) => {
     try {
         let user = await User.findOne({ uid: req.params.uid }).populate({path:'campaigns'});
         console.log("🚀 ~ file: user.controller.js ~ line 7 ~ getUserByUid ~ user", user)
-        if (!user) {
-            const newUser = await new User(req.params).save();
-            console.log("🚀 ~ file: user.controller.js ~ line 10 ~ getUserByUid ~ newUser", newUser)
-            user = await User.findById(newUser._id);
-            console.log("🚀 ~ file: user.controller.js ~ line 12 ~ getUserByUid ~ user", user)
-        }
         res.status(200).send(user);
     }
     catch (error) {
@@ -20,7 +14,7 @@ const getUserByUid = async (req, res) => {
 }
 const createUser = async (req, res) => {
     try {
-        const newUser = await new User(req.body).save();
+        const newUser = await new User({...req.body,name:req.body.displayName}).save();
         console.log("🚀 ~ file: user.controller.js ~ line 18 ~ createUser ~ newUser", newUser)
         const user = await User.findById(newUser._id);
         console.log("🚀 ~ file: user.controller.js ~ line 20 ~ createUser ~ user", user)

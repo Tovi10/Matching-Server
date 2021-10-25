@@ -16,6 +16,9 @@ const userSchema = mongoose.Schema({
     name: {
         type: String,
     },
+    photoURL:{
+        type:String,
+    },
     allowed:{
         type:Boolean,
         default:0
