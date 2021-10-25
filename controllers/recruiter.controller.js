@@ -62,7 +62,7 @@ const updateRecruiterDetails = async (req, res) => {
             html: `<h3>שלום ${recruiter.user.name}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
             <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
-            // html: `<h6>שלום ${recruiter.user.name}</h6>
+            // html: `<h3>שלום ${recruiter.user.name}</h3>
             // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
             // <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
             // // text: `אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
@@ -81,7 +81,7 @@ const updateRecruiterDetails = async (req, res) => {
 const getRecruiterById = async (req, res) => {
     try {
         let id = req.params.id;
-        let recruiter = await Recruiter.findById(id);
+        let recruiter = await Recruiter.findById(id).populate({ path: 'campaign' });
         console.log("🚀 ~ file: recruiter.controller.js ~ line 85 ~ getRecruiterById ~ recruiter", recruiter)
         res.status(200).send({ recruiter });
     }

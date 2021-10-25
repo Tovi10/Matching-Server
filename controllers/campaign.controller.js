@@ -3,28 +3,61 @@ const Company = require('../models/company.model');
 const User = require('../models/user.model');
 
 const findAllCampaignsWithFullPopulate = async () => {
-    return await Campaign.find().populate([{ path: 'company' },
-    {
-        path: 'donations',
-        populate: [{ path: 'card', populate: { path: 'gift' } }, { path: 'user' }]
-    },
-    {
-        path: 'recruiters',
-        populate: { path: 'user' }
-    },
-    { path: 'cards', populate: { path: 'gift' } }]);
+    return await Campaign.find().populate([
+        { path: 'company' },
+        {
+            path: 'donations',
+            populate: [
+                {
+                    path: 'card',
+                    populate:
+                        { path: 'gift' }
+                },
+                { path: 'user' },
+                {
+                    path: 'recruiter',
+                    populate:
+                        { path: 'user' }
+                },]
+        },
+        {
+            path: 'recruiters',
+            populate: { path: 'user' }
+        },
+        {
+            path: 'cards',
+            populate:
+                { path: 'gift' }
+        }]);
 }
 
 const findCampaignWithFullPopulate = async (id) => {
-    return await Campaign.findById(id).populate([{ path: 'company' },
-    {
-        path: 'donations',
-        populate: [{ path: 'card', populate: { path: 'gift' } }, { path: 'user' }]
-    }, {
-        path: 'recruiters',
-        populate: { path: 'user' }
-    },
-    { path: 'cards', populate: { path: 'gift' } }]);;
+    return await Campaign.findById(id).populate([
+        { path: 'company' },
+        {
+            path: 'donations',
+            populate: [
+                {
+                    path: 'card',
+                    populate:
+                        { path: 'gift' }
+                },
+                { path: 'user' },
+                {
+                    path: 'recruiter',
+                    populate:
+                        { path: 'user' }
+                }]
+        }, {
+            path: 'recruiters',
+            populate:
+                { path: 'user' }
+        },
+        {
+            path: 'cards',
+            populate:
+                { path: 'gift' }
+        }]);;
 }
 
 const getAllCampaigns = async (req, res) => {
@@ -56,6 +89,7 @@ const getCampaignById = async (req, res) => {
         res.status(500).send({ error });
     }
 }
+
 const createCampaign = async (req, res) => {
     try {
         let ansCampaign;
