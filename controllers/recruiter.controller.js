@@ -7,8 +7,8 @@ const sendMail = (mailOptions) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'leader.meet.mail@gmail.com',
-            pass: 'leadermeet123',
+            user: 'giftmatching@gmail.com',
+            pass: 'matching',
         }
     });
     transporter.sendMail(mailOptions, function (error, info) {
