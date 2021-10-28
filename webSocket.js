@@ -15,7 +15,7 @@ const setSocket = () => {
             const numClients = myRoom.length;
             console.log("num of views on this campaign " + numClients);
 
-            io.to(room).emit('gotEntered', { msg: 'Enter to campaign ' + room });
+            socket.emit('gotEntered', { msg: 'Enter to campaign ' + room });
         });
 
         socket.on('newDonation', (data) => {
@@ -26,7 +26,7 @@ const setSocket = () => {
         socket.on('leaveCampaign', (data) => {
             console.log('leave campaign ' + data.room);
             socket.leave(data.room);
-            io.to(data.room).emit('leaveCampaign', { msg: 'leave campaign ' + data.room });
+            socket.emit('leaveCampaign', { msg: 'leave campaign ' + data.room });
         })
 
     });
