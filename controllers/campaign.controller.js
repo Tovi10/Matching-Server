@@ -120,7 +120,9 @@ const updateCampaign = async (req, res) => {
         console.log("🚀 ~ file: campaign.controller.js ~ line 50 ~ updateCampaign ~ updateCampaign", updateCampaign);
         const campaign = await findCampaignWithFullPopulate(updateCampaign._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 85 ~ updateCampaign ~ campaign", campaign)
-        res.status(200).send(campaign);
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: campaign.controller.js ~ line 124 ~ updateCampaign ~ allCampaigns", allCampaigns)
+        res.status(200).send({campaign,allCampaigns});
     }
     catch (error) {
         console.log("🚀 ~ file: campaign.controller.js ~ line 45 ~ updateCampaign ~ error", error);
