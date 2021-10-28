@@ -61,9 +61,9 @@ const updateRecruiterDetails = async (req, res) => {
             to: recruiter.user.email,
             html: `<h3>שלום ${recruiter.user.name}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
+            // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
             <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
             // html: `<h3>שלום ${recruiter.user.name}</h3>
-            // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
             // <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
             // // text: `אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
             // text: `שלום ${recruiter.user.name}`,
