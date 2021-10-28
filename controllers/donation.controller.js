@@ -9,7 +9,7 @@ const { sendMail } = require('./recruiter.controller');
 const createDonation = async (req, res) => {
     try {
         const newDonation = await new Donation(req.body).save();
-        const donation = await Donation.findById(newDonation._id).populate({ path: 'user' });
+        const donation = await Donation.findById(newDonation._id).populate([{ path: 'user' }, { path: 'card', populate: { path: 'gift' } }]);
         console.log("🚀 ~ file: donation.controller.js ~ line 9 ~ createDonation ~ donation", donation)
         const card = await Card.findById(req.body.card);
         const updateCampaign = await Campaign.findByIdAndUpdate(req.params.campaignId, { $push: { 'donations': newDonation._id }, $inc: { 'goalRaised': card.sum } });
@@ -38,7 +38,7 @@ const createDonation = async (req, res) => {
         }
         const campaign = await findCampaignWithFullPopulate(req.params.campaignId);
         console.log("🚀 ~ file: donation.controller.js ~ line 10 ~ createDonation ~ campaign", campaign)
-        res.status(200).send(campaign);
+        res.status(200).send({ campaign, donation });
     }
     catch (error) {
         console.log("🚀 ~ file: donation.controller.js ~ line 14 ~ createDonation ~ error", error)

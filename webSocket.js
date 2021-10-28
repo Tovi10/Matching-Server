@@ -19,8 +19,8 @@ const setSocket = () => {
         });
 
         socket.on('newDonation', (data) => {
-            const { room } = data;
-            io.to(room).emit('newDonation', { msg: 'New donation' });
+            const { room ,donation} = data;
+            io.to(room).emit('newDonation', { msg: 'New donation',donation });
         });
 
         socket.on('leaveCampaign', (data) => {
