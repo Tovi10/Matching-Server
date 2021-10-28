@@ -18,12 +18,13 @@ const giftSchema = mongoose.Schema({
     },
     numOfUsed: {
         type: Number,
+        default: 0,
     },
-    from:{
-        type:String,
+    from: {
+        type: String,
     },
-    coupon:{
-        type:Number,
+    coupon: {
+        type: Number,
     }
 })
 
