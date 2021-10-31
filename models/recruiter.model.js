@@ -22,10 +22,10 @@ const recruiterSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    donors: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Donor',
-    }],
+    // donors: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Donor',
+    // }],
 })
 
 module.exports = mongoose.model('Recruiter', recruiterSchema)
