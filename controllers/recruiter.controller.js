@@ -81,7 +81,7 @@ const updateRecruiterDetails = async (req, res) => {
 const getRecruiterById = async (req, res) => {
     try {
         let id = req.params.id;
-        let recruiter = await Recruiter.findById(id).populate({ path: 'campaign' });
+        let recruiter = await Recruiter.findById(id).populate([{ path: 'campaign' }, {path: 'user'}]);
         console.log("🚀 ~ file: recruiter.controller.js ~ line 85 ~ getRecruiterById ~ recruiter", recruiter)
         res.status(200).send({ recruiter });
     }

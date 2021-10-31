@@ -6,7 +6,7 @@ const createApply = async (req, res) => {
     try {
         const apply = await new Apply(req.body).save();
         const mailOptions = {
-            to: 's0556788562@gmail.com',
+            to: 'giftmatching@gmail.com',
             subject: 'בקשה חדשה ליצירת קמפיין',
             html: `<h3>תוכן הבקשה הוא:</h3>${apply.text}
             לצפיה בכל הבקשות אנא הכנסי לקטגוריה בקשות בקישור
@@ -39,8 +39,8 @@ const confirmApply = async (req, res) => {
         const editUser = await User.findByIdAndUpdate(apply.user, { $set: { allowed: 1 } });
         console.log("🚀 ~ file: apply.controller.js ~ line 38 ~ confirmApply ~ editUser", editUser)
         const mailOptions = {
-            // to: editUser.email,
-            to: 's0556788562@gmail.com',
+            to: editUser.email,
+            // to: 'giftmatching@gmail.com',
             subject: 'אושרה בקשה ליצירת קמפיין',
             html: `ליצירת הקמפיין אנא הכנס לקטגוריה יצירת קמפיין בקישור
             <br/>https://matching-try.herokuapp.com/management <br/>http://localhost:3000/management<br/>

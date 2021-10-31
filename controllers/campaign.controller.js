@@ -1,5 +1,8 @@
 const Campaign = require('../models/campaign.model');
+const Card = require('../models/card.model');
 const Company = require('../models/company.model');
+const Donation = require('../models/donation.model');
+const Recruiter = require('../models/recruiter.model');
 const User = require('../models/user.model');
 
 const findAllCampaignsWithFullPopulate = async () => {
@@ -122,10 +125,33 @@ const updateCampaign = async (req, res) => {
         console.log("🚀 ~ file: campaign.controller.js ~ line 85 ~ updateCampaign ~ campaign", campaign)
         const allCampaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: campaign.controller.js ~ line 124 ~ updateCampaign ~ allCampaigns", allCampaigns)
-        res.status(200).send({campaign,allCampaigns});
+        res.status(200).send({ campaign, allCampaigns });
     }
     catch (error) {
         console.log("🚀 ~ file: campaign.controller.js ~ line 45 ~ updateCampaign ~ error", error);
+        res.status(500).send({ error });
+    }
+}
+
+const deleteCampaign = async (req, res) => {
+    try {
+        const deleteCampaign = await Campaign.findById(req.params._id);
+        console.log("🚀 ~ file: campaign.controller.js ~ line 136 ~ deleteCampaign ~ deleteCampaign", deleteCampaign)
+        if (deleteCampaign) {
+            // {"breed" : { $in : ["Pitbull", "Great Dane", "Pug"]}}
+            const cardsToDelete = await Card.find({ _id: { $in: deleteCampaign.cards } })
+            console.log("🚀 ~ file: campaign.controller.js ~ line 141 ~ deleteCampaign ~ cardsToDelete", cardsToDelete)
+            const recruitersToDelete = await Recruiter.find({ _id: { $in: deleteCampaign.recruiters } })
+            console.log("🚀 ~ file: campaign.controller.js ~ line 143 ~ deleteCampaign ~ recruitersToDelete", recruitersToDelete);
+            const donationsToDelete = await Donation.find({ _id: { $in: deleteCampaign.donations } })
+            console.log("🚀 ~ file: campaign.controller.js ~ line 146 ~ deleteCampaign ~ donationsToDelete", donationsToDelete)
+        }
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: campaign.controller.js ~ line 150 ~ deleteCampaign ~ allCampaigns", allCampaigns)
+        res.status(200).send(allCampaigns);
+
+    } catch (error) {
+        console.log("🚀 ~ file: campaign.controller.js ~ line 150 ~ deleteCampaign ~ error", error)
         res.status(500).send({ error });
     }
 }
@@ -137,4 +163,5 @@ module.exports = {
     getAllCampaigns,
     createCampaign,
     updateCampaign,
+    deleteCampaign,
 };
