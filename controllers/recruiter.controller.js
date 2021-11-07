@@ -2,6 +2,8 @@ const User = require("../models/user.model");
 const Recruiter = require("../models/recruiter.model");
 const Campaign = require("../models/campaign.model");
 const nodemailer = require('nodemailer');
+const { findAllCampaignsWithFullPopulate } = require("./campaign.controller");
+const { findUserByUidWithFullPopulate } = require("./user.controller");
 
 const sendMail = (mailOptions) => {
     var transporter = nodemailer.createTransport({
@@ -62,12 +64,7 @@ const updateRecruiterDetails = async (req, res) => {
             html: `<h3>שלום ${recruiter.user.name}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
             // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
-            <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
-            // html: `<h3>שלום ${recruiter.user.name}</h3>
-            // <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`,
-            // // text: `אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${campaign._id}`,
-            // text: `שלום ${recruiter.user.name}`,
-            // text: `והלינק לאזור האישי שלך הוא : ${req.body.link}`
+            <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`
         }
         sendMail(mailOptions);
         res.status(200).send({ recruiter });
@@ -81,12 +78,40 @@ const updateRecruiterDetails = async (req, res) => {
 const getRecruiterById = async (req, res) => {
     try {
         let id = req.params.id;
-        let recruiter = await Recruiter.findById(id).populate([{ path: 'campaign' }, {path: 'user'}]);
+        let recruiter = await Recruiter.findById(id).populate([{ path: 'campaign' }, { path: 'user' }]);
         console.log("🚀 ~ file: recruiter.controller.js ~ line 85 ~ getRecruiterById ~ recruiter", recruiter)
         res.status(200).send({ recruiter });
     }
     catch (error) {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 86 ~ getRecruiterById ~ error", error)
+        res.status(500).send({ error });
+    }
+}
+const updateRecruiter = async (req, res) => {
+    try {
+        const recruiter = await Recruiter.updateOne({ _id: req.body.recruiter }, req.body);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 91 ~ updateRecruiter ~ recruiter", recruiter);
+        const campaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 93 ~ updateRecruiter ~ campaigns", campaigns)
+        const user = await findUserByUidWithFullPopulate(req.params.uid);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 95 ~ updateRecruiter ~ user", user)
+        res.status(200).send({ recruiter, user, campaigns });
+    } catch (error) {
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 98 ~ updateRecruiter ~ error", error)
+        res.status(500).send({ error });
+    }
+}
+const deleteRecruiter = async (req, res) => {
+    try {
+        const recruiter = await Recruiter.findById(req.params.id);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 101 ~ deleteRecruiter ~ recruiter", recruiter)
+        const campaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 109 ~ deleteRecruiter ~ campaigns", campaigns)
+        const user = await findUserByUidWithFullPopulate(req.params.uid);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 111 ~ deleteRecruiter ~ user", user)
+        res.status(200).send({ recruiter, user, campaigns });
+    } catch (error) {
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 104 ~ deleteRecruiter ~ error", error)
         res.status(500).send({ error });
     }
 }
@@ -96,4 +121,6 @@ module.exports = {
     updateRecruiterDetails,
     getRecruiterById,
     sendMail,
+    updateRecruiter,
+    deleteRecruiter,
 }

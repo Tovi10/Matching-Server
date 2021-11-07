@@ -11,7 +11,7 @@ const createDonation = async (req, res) => {
         const newDonation = await new Donation(req.body).save();
         const donation = await Donation.findById(newDonation._id).populate([{ path: 'user' }, { path: 'card', populate: { path: 'gift' } }]);
         console.log("🚀 ~ file: donation.controller.js ~ line 9 ~ createDonation ~ donation", donation)
-        const card = await Card.findById(req.body.card);
+        const card = await Card.findByIdAndUpdate(req.body.card, { $set: { used: true } });
         const updateCampaign = await Campaign.findByIdAndUpdate(req.params.campaignId, { $push: { 'donations': newDonation._id }, $inc: { 'goalRaised': card.sum } });
         let updateRecruiter;
         if (req.body.recruiter)

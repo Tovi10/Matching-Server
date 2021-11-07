@@ -1,5 +1,7 @@
 const Card = require('../models/card.model');
 const Campaign = require('../models/campaign.model');
+const { findAllCampaignsWithFullPopulate } = require('./campaign.controller');
+const { findUserByUidWithFullPopulate } = require('./user.controller');
 
 const getCardById = async (req, res) => {
     try {
@@ -44,10 +46,35 @@ const updateCard = async (req, res) => {
         console.log("🚀 ~ file: card.controller.js ~ line 44 ~ updateCard ~ updateCard", updateCard)
         let cards = await Card.find({});
         console.log("🚀 ~ file: card.controller.js ~ line 46 ~ updateCard ~ cards", cards)
-        res.status(200).send(cards);
+        const campaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: card.controller.js ~ line 49 ~ updateCard ~ campaigns", campaigns)
+        const user = await findUserByUidWithFullPopulate(req.body.uid);
+        console.log("🚀 ~ file: card.controller.js ~ line 52 ~ updateCard ~ user", user)
+        res.status(200).send({ cards, campaigns, user });
     }
     catch (error) {
         console.log("🚀 ~ file: card.controller.js ~ line 50 ~ updateCard ~ error", error)
+        res.status(500).send({ error });
+    }
+}
+
+
+const deleteCard = async (req, res) => {
+    try {
+        const checkCard = await Card.findById(req.params.id);
+        if (checkCard.used) { 
+            throw Error('הכרטיס בשימוש!')
+        }
+        const card = await Card.findByIdAndDelete(req.params.id);
+        console.log("🚀 ~ file: card.controller.js ~ line 65 ~ deleteCard ~ card", card);
+        const campaigns = await findAllCampaignsWithFullPopulate();
+        console.log("🚀 ~ file: card.controller.js ~ line 67 ~ deleteCard ~ campaigns", campaigns)
+        const user = await findUserByUidWithFullPopulate(req.params.uid);
+        console.log("🚀 ~ file: card.controller.js ~ line 69 ~ deleteCard ~ user", user)
+        res.status(200).send({ card, user, campaigns });
+    }
+    catch (error) {
+        console.log("🚀 ~ file: card.controller.js ~ line 73 ~ deleteCard ~ error", error)
         res.status(500).send({ error });
     }
 }
@@ -57,4 +84,5 @@ module.exports = {
     getAllCards,
     createCard,
     updateCard,
+    deleteCard,
 };

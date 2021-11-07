@@ -35,7 +35,8 @@ const findUserByUidWithFullPopulate = async (uid) => {
 
 const getUserByUid = async (req, res) => {
     try {
-       const user=await findUserByUidWithFullPopulate(req.params.uid);
+           const user=await findUserByUidWithFullPopulate(req.params.uid);
+        // const user = await User.find({ uid: req.params.uid });
         console.log("🚀 ~ file: user.controller.js ~ line 7 ~ getUserByUid ~ user", user)
         res.status(200).send(user);
     }
@@ -49,7 +50,7 @@ const createUser = async (req, res) => {
         const newUser = await new User({ ...req.body, name: req.body.displayName }).save();
         console.log("🚀 ~ file: user.controller.js ~ line 18 ~ createUser ~ newUser", newUser)
         // const user = await User.findById(newUser._id);
-       const user=await findUserByUidWithFullPopulate(newUser.uid);
+        const user = await findUserByUidWithFullPopulate(newUser.uid);
         console.log("🚀 ~ file: user.controller.js ~ line 20 ~ createUser ~ user", user)
         res.status(200).send(user);
     }
@@ -64,7 +65,7 @@ const updateUser = async (req, res) => {
         let updateUser = await User.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: user.controller.js ~ line 38 ~ updateUser ~ updateUser", updateUser)
         // let user = await User.findById(updateUser._id);
-       const user=await findUserByUidWithFullPopulate(updateUser.uid);
+        const user = await findUserByUidWithFullPopulate(updateUser.uid);
         console.log("🚀 ~ file: user.controller.js ~ line 40 ~ updateUser ~ user", user)
         res.status(200).send(user);
     }
@@ -78,4 +79,5 @@ module.exports = {
     getUserByUid,
     createUser,
     updateUser,
+    findUserByUidWithFullPopulate
 };

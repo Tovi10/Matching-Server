@@ -11,6 +11,10 @@ const cardSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Gift',
     },
+    used:{
+        type:Boolean,
+        default:false,
+    }
 })
 
 module.exports = mongoose.model('Card', cardSchema)

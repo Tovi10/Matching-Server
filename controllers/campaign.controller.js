@@ -135,21 +135,18 @@ const updateCampaign = async (req, res) => {
 
 const deleteCampaign = async (req, res) => {
     try {
-        const deleteCampaign = await Campaign.findById(req.params._id);
+        const deleteCampaign = await Campaign.findByIdAndDelete(req.params._id);
         console.log("🚀 ~ file: campaign.controller.js ~ line 136 ~ deleteCampaign ~ deleteCampaign", deleteCampaign)
         if (deleteCampaign) {
             // {"breed" : { $in : ["Pitbull", "Great Dane", "Pug"]}}
-            const cardsToDelete = await Card.find({ _id: { $in: deleteCampaign.cards } })
+            const cardsToDelete = await Card.deleteMany({ _id: { $in: deleteCampaign.cards } })
             console.log("🚀 ~ file: campaign.controller.js ~ line 141 ~ deleteCampaign ~ cardsToDelete", cardsToDelete)
-            const recruitersToDelete = await Recruiter.find({ _id: { $in: deleteCampaign.recruiters } })
+            const recruitersToDelete = await Recruiter.deleteMany({ _id: { $in: deleteCampaign.recruiters } })
             console.log("🚀 ~ file: campaign.controller.js ~ line 143 ~ deleteCampaign ~ recruitersToDelete", recruitersToDelete);
-            const donationsToDelete = await Donation.find({ _id: { $in: deleteCampaign.donations } })
-            console.log("🚀 ~ file: campaign.controller.js ~ line 146 ~ deleteCampaign ~ donationsToDelete", donationsToDelete)
         }
         const allCampaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: campaign.controller.js ~ line 150 ~ deleteCampaign ~ allCampaigns", allCampaigns)
         res.status(200).send(allCampaigns);
-
     } catch (error) {
         console.log("🚀 ~ file: campaign.controller.js ~ line 150 ~ deleteCampaign ~ error", error)
         res.status(500).send({ error });
