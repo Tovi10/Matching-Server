@@ -5,6 +5,40 @@ const Recruiter = require('../models/recruiter.model');
 const Gift = require('../models/gift.model');
 const { findCampaignWithFullPopulate } = require('./campaign.controller');
 const { sendMail } = require('./recruiter.controller');
+const axios = require('axios')
+
+const clearingCredit = (req, res) => {
+    axios.post('https://api.invoice4u.co.il/Services/ApiService.svc/ProcessApiRequestV2', {
+        "request": {
+            "Description": "a description of the order",
+            "Email": "giftmatching@gmail.com",
+            "FullName": "oshrat",
+            "Invoice4UUserApiKey": "70fae535-cd9c-443f-9753-8ae92135688b",
+            "PaymentsNum": 1,
+            "Phone": "0500000000",
+            "ReturnUrl": "https://www.google.co.il/",
+            "Sum": 1,
+            "Type": 1,
+            "OrderIdClientUsage": "111222",
+            "DocumentType": 3,
+            "IsDocCreate": true,
+            "IsManualDocCreationsWithParams": true,
+            "DocItemName": "test",
+            "DocItemQuantity": "1",
+            "DocItemPrice": "1",
+            "DocItemTaxRate": "17",
+            "IsQaMode": false
+        }
+    }
+    ).then(result => {
+        res.status(200).send({ url: result.data.d.ClearingRedirectUrl });
+        console.log("🚀 ~ file: donation.controller.js ~ line 32 ~ createDonation ~ result", result)
+    }).catch(error => {
+        console.log("🚀 ~ file: donation.controller.js ~ line 35 ~ createDonation ~ error", error)
+    })
+
+}
+
 
 const createDonation = async (req, res) => {
     try {
@@ -71,4 +105,5 @@ const getDonationsByRecruiterId = async (req, res) => {
 module.exports = {
     createDonation,
     getDonationsByRecruiterId,
+    clearingCredit,
 };
