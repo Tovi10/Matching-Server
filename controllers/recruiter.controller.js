@@ -103,8 +103,13 @@ const updateRecruiter = async (req, res) => {
 }
 const deleteRecruiter = async (req, res) => {
     try {
-        const recruiter = await Recruiter.findById(req.params.id);
-        console.log("🚀 ~ file: recruiter.controller.js ~ line 101 ~ deleteRecruiter ~ recruiter", recruiter)
+        const checkRecruiter = await Recruiter.findById(req.params.id);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 107 ~ deleteRecruiter ~ checkRecruiter", checkRecruiter)
+        if (checkRecruiter.sumRaised) {
+            throw Error('מגייס עם תרומות!')
+        }
+        const recruiter=await Recruiter.findByIdAndDelete(req.params.id);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 112 ~ deleteRecruiter ~ recruiter", recruiter)
         const campaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: recruiter.controller.js ~ line 109 ~ deleteRecruiter ~ campaigns", campaigns)
         const user = await findUserByUidWithFullPopulate(req.params.uid);
