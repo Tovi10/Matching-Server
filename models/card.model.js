@@ -14,7 +14,7 @@ const cardSchema = mongoose.Schema({
     used:{
         type:Boolean,
         default:false,
-    }
+    },
 })
 
 module.exports = mongoose.model('Card', cardSchema)

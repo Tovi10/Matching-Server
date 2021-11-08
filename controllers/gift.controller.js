@@ -67,10 +67,22 @@ const updateGift = async (req, res) => {
 }
 
 
+const deleteGift = async (req, res) => {
+    try {
+        const gift = await Gift.findByIdAndDelete(req.params.id);
+        console.log("🚀 ~ file: gift.controller.js ~ line 73 ~ deleteGift ~ gift", gift)
+        res.status(200).send(gift);
+    }
+    catch (error) {
+        console.log("🚀 ~ file: gift.controller.js ~ line 77 ~ deleteGift ~ error", error)
+        res.status(500).send({ error });
+    }
+}
 
 module.exports = {
     getGiftById,
     getAllGifts,
     createGift,
     updateGift,
+    deleteGift,
 };

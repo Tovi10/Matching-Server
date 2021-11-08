@@ -1,5 +1,6 @@
 const Card = require('../models/card.model');
 const Campaign = require('../models/campaign.model');
+const Gift = require('../models/gift.model');
 const { findAllCampaignsWithFullPopulate } = require('./campaign.controller');
 const { findUserByUidWithFullPopulate } = require('./user.controller');
 
@@ -31,7 +32,10 @@ const createCard = async (req, res) => {
     try {
         let ansCard = await new Card(req.body).save();
         console.log("🚀 ~ file: card.controller.js ~ line 31 ~ createCard ~ ansCard", ansCard);
+        const gift = await Gift.findByIdAndUpdate(req.body.gift, { $set: { used: true } });
+        console.log("🚀 ~ file: card.controller.js ~ line 36 ~ createCard ~ gift", gift)
         let campaign = await Campaign.findByIdAndUpdate(req.params.id, { $push: { 'cards': ansCard._id } });
+        console.log("🚀 ~ file: card.controller.js ~ line 38 ~ createCard ~ campaign", campaign)
         res.status(200).send(ansCard);
     }
     catch (error) {
@@ -62,7 +66,7 @@ const updateCard = async (req, res) => {
 const deleteCard = async (req, res) => {
     try {
         const checkCard = await Card.findById(req.params.id);
-        if (checkCard.used) { 
+        if (checkCard.used) {
             throw Error('הכרטיס בשימוש!')
         }
         const card = await Card.findByIdAndDelete(req.params.id);
@@ -71,6 +75,13 @@ const deleteCard = async (req, res) => {
         console.log("🚀 ~ file: card.controller.js ~ line 67 ~ deleteCard ~ campaigns", campaigns)
         const user = await findUserByUidWithFullPopulate(req.params.uid);
         console.log("🚀 ~ file: card.controller.js ~ line 69 ~ deleteCard ~ user", user)
+        // check if this gift isnt in used
+        const cardWithSameGift = await Card.findOne({ gift: req.params.gift });
+        console.log("🚀 ~ file: card.controller.js ~ line 80 ~ deleteCard ~ cardWithSameGift", cardWithSameGift)
+        if (!cardWithSameGift) {
+            const gift = await Gift.findByIdAndUpdate(req.params.gift, { $set: { used: false } });
+            console.log("🚀 ~ file: card.controller.js ~ line 83 ~ deleteCard ~ gift", gift)
+        }
         res.status(200).send({ card, user, campaigns });
     }
     catch (error) {
