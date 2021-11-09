@@ -61,13 +61,15 @@ const updateRecruiterDetails = async (req, res) => {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 59 ~ updateRecruiterDetails ~ recruiter", recruiter);
         const mailOptions = {
             to: recruiter.user.email,
-            html: `<h3>שלום ${recruiter.user.name}</h3>
+            subject: 'מגייס חדש!🎈',
+            html: `<h3>שלום ${recruiter.designName}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
-            // <p>אתה יכול לשתף את הלינק לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p><br/>
             <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`
         }
         sendMail(mailOptions);
-        res.status(200).send({ recruiter });
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
+        const user = await findUserByUidWithFullPopulate(req.body.uid);
+        res.status(200).send({ recruiter, allCampaigns, user });
     }
     catch (error) {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 61 ~ updateRecruiterDetails ~ error", error);
@@ -89,6 +91,11 @@ const getRecruiterById = async (req, res) => {
 }
 const updateRecruiter = async (req, res) => {
     try {
+        const checkRecruiter = await Recruiter.findById(req.body.recruiter);
+        console.log("🚀 ~ file: recruiter.controller.js ~ line 95 ~ updateRecruiter ~ checkRecruiter", checkRecruiter)
+        if (checkRecruiter.sumRaised) {
+            throw Error('מגייס עם תרומות!')
+        } 
         const recruiter = await Recruiter.updateOne({ _id: req.body.recruiter }, req.body);
         console.log("🚀 ~ file: recruiter.controller.js ~ line 91 ~ updateRecruiter ~ recruiter", recruiter);
         const campaigns = await findAllCampaignsWithFullPopulate();
@@ -108,7 +115,7 @@ const deleteRecruiter = async (req, res) => {
         if (checkRecruiter.sumRaised) {
             throw Error('מגייס עם תרומות!')
         }
-        const recruiter=await Recruiter.findByIdAndDelete(req.params.id);
+        const recruiter = await Recruiter.findByIdAndDelete(req.params.id);
         console.log("🚀 ~ file: recruiter.controller.js ~ line 112 ~ deleteRecruiter ~ recruiter", recruiter)
         const campaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: recruiter.controller.js ~ line 109 ~ deleteRecruiter ~ campaigns", campaigns)

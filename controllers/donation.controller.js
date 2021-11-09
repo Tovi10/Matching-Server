@@ -3,9 +3,10 @@ const Card = require('../models/card.model');
 const Donation = require('../models/donation.model');
 const Recruiter = require('../models/recruiter.model');
 const Gift = require('../models/gift.model');
-const { findCampaignWithFullPopulate } = require('./campaign.controller');
+const { findCampaignWithFullPopulate, findAllCampaignsWithFullPopulate } = require('./campaign.controller');
 const { sendMail } = require('./recruiter.controller');
-const axios = require('axios')
+const axios = require('axios');
+const { findUserByUidWithFullPopulate } = require('./user.controller');
 
 const clearingCredit = (req, res) => {
     axios.post('https://api.invoice4u.co.il/Services/ApiService.svc/ProcessApiRequestV2', {
@@ -71,8 +72,10 @@ const createDonation = async (req, res) => {
             await sendMail(mailOptionsForCoupon);
         }
         const campaign = await findCampaignWithFullPopulate(req.params.campaignId);
-        console.log("🚀 ~ file: donation.controller.js ~ line 10 ~ createDonation ~ campaign", campaign)
-        res.status(200).send({ campaign, donation });
+        console.log("🚀 ~ file: donation.controller.js ~ line 10 ~ createDonation ~ campaign", campaign);
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
+        const user = await findUserByUidWithFullPopulate(req.params.uid);
+        res.status(200).send({ campaign, donation ,allCampaigns,user});
     }
     catch (error) {
         console.log("🚀 ~ file: donation.controller.js ~ line 14 ~ createDonation ~ error", error)

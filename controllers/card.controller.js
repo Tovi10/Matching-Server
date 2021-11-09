@@ -36,7 +36,9 @@ const createCard = async (req, res) => {
         console.log("🚀 ~ file: card.controller.js ~ line 36 ~ createCard ~ gift", gift)
         let campaign = await Campaign.findByIdAndUpdate(req.params.id, { $push: { 'cards': ansCard._id } });
         console.log("🚀 ~ file: card.controller.js ~ line 38 ~ createCard ~ campaign", campaign)
-        res.status(200).send(ansCard);
+        const allCampaigns = await findAllCampaignsWithFullPopulate();
+        const user = await findUserByUidWithFullPopulate(req.params.uid)
+        res.status(200).send({user,allCampaigns});
     }
     catch (error) {
         console.log("🚀 ~ file: card.controller.js ~ line 21 ~ createCard ~ error", error);
@@ -46,6 +48,10 @@ const createCard = async (req, res) => {
 
 const updateCard = async (req, res) => {
     try {
+        const checkCard = await Card.findById(req.body.id);
+        if (checkCard.used) {
+            throw Error('הכרטיס בשימוש!')
+        }
         let updateCard = await Card.findByIdAndUpdate(req.body._id, req.body);
         console.log("🚀 ~ file: card.controller.js ~ line 44 ~ updateCard ~ updateCard", updateCard)
         let cards = await Card.find({});
@@ -82,7 +88,8 @@ const deleteCard = async (req, res) => {
             const gift = await Gift.findByIdAndUpdate(req.params.gift, { $set: { used: false } });
             console.log("🚀 ~ file: card.controller.js ~ line 83 ~ deleteCard ~ gift", gift)
         }
-        res.status(200).send({ card, user, campaigns });
+        const allGifts=await Gift.find({});
+        res.status(200).send({ card, user, campaigns,allGifts });
     }
     catch (error) {
         console.log("🚀 ~ file: card.controller.js ~ line 73 ~ deleteCard ~ error", error)

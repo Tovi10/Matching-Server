@@ -6,7 +6,8 @@ const recruiterSchema = mongoose.Schema({
     },
     sumRaised: {
         type: Number,
-        initialValue: 0
+        // initialValue: 0
+        default:0
     },
     designName: {
         type: String,
