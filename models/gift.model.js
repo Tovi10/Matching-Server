@@ -25,7 +25,12 @@ const giftSchema = mongoose.Schema({
     },
     coupon: {
         type: Number,
-    }
+    },
+    used:{
+        type:Boolean,
+        default:false,
+    },
+
 })
 
 module.exports = mongoose.model('Gift', giftSchema)
