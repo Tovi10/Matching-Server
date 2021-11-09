@@ -10,14 +10,14 @@ const axios = require('axios')
 const clearingCredit = (req, res) => {
     axios.post('https://api.invoice4u.co.il/Services/ApiService.svc/ProcessApiRequestV2', {
         "request": {
-            "Description": "a description of the order",
-            "Email": "giftmatching@gmail.com",
-            "FullName": "oshrat",
+            "Description": req.body.description,
+            "Email": req.body.email,
+            "FullName": req.body.fullName,
             "Invoice4UUserApiKey": "70fae535-cd9c-443f-9753-8ae92135688b",
-            "PaymentsNum": 1,
-            "Phone": "0500000000",
-            "ReturnUrl": "https://www.google.co.il/",
-            "Sum": 1,
+            "PaymentsNum": req.body.paymentsNum,
+            "Phone": req.body.phone,
+            "ReturnUrl": "http://localhost:3000/",
+            "Sum": req.body.sum,
             "Type": 1,
             "OrderIdClientUsage": "111222",
             "DocumentType": 3,
