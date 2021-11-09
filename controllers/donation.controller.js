@@ -17,7 +17,8 @@ const clearingCredit = (req, res) => {
             "Invoice4UUserApiKey": "70fae535-cd9c-443f-9753-8ae92135688b",
             "PaymentsNum": req.body.paymentsNum,
             "Phone": req.body.phone,
-            "ReturnUrl": "http://localhost:3000/",
+            // "ReturnUrl": "http://localhost:3000/",
+            "ReturnUrl": "https://matching-try.herokuapp.com/",
             "Sum": req.body.sum,
             "Type": 1,
             "OrderIdClientUsage": "111222",
@@ -75,7 +76,7 @@ const createDonation = async (req, res) => {
         console.log("🚀 ~ file: donation.controller.js ~ line 10 ~ createDonation ~ campaign", campaign);
         const allCampaigns = await findAllCampaignsWithFullPopulate();
         const user = await findUserByUidWithFullPopulate(req.params.uid);
-        res.status(200).send({ campaign, donation ,allCampaigns,user});
+        res.status(200).send({ campaign, donation, allCampaigns, user });
     }
     catch (error) {
         console.log("🚀 ~ file: donation.controller.js ~ line 14 ~ createDonation ~ error", error)
