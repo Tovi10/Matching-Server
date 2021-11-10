@@ -18,6 +18,7 @@ const clearingCredit = (req, res) => {
             "PaymentsNum": req.body.paymentsNum,
             "Phone": req.body.phone,
             "ReturnUrl": "http://localhost:3000/",
+            // "ReturnUrl": "https://matching-try.herokuapp.com/",
             "Sum": req.body.sum,
             "Type": 1,
             "OrderIdClientUsage": "111222",

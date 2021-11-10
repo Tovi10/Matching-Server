@@ -18,19 +18,15 @@ const donationRouter = require('./routes/donation.route');
 const recruiterRouter = require('./routes/recruiter.route');
 const applyRouter = require('./routes/apply.route');
 
-
-// const invoice  = require('https://apiqa.invoice4u.co.il/Services/ApiService.svc?singleWsdl');
-
-var customer = require('./invice4u');
-// customer.Login();
-
-
 app.use(express.static('public'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, './build')));
 
+// app.get("/*", (req, res, next) => {
+//     res.sendFile(path.join(__dirname, "./build/index.html"));
+// });
 app.get("/about", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
