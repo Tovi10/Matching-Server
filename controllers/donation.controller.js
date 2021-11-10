@@ -56,18 +56,22 @@ const createDonation = async (req, res) => {
             const mailOptionsForUser = {
                 to: donation.user.email,
                 subject: 'שובר על התרומה',
-                html: `מספר השובר הוא:
+                html: `<div><b>מספר השובר הוא:</b>
                 ${gift.coupon}.${gift.numOfUsed}  
-                השובר הינו אישי ומיועד לשימוש חד פעמי`
+                <br></br>
+                <span style="background: #FAE01A;">השובר הינו אישי ומיועד לשימוש חד פעמי.</span>
+                </div>`
             }
             await sendMail(mailOptionsForUser);
             const mailOptionsForCoupon = {
                 to: gift.from,
                 subject: 'שימוש נוסף בתרומה שלכם',
-                html: `מספר השובר הוא:
+                html: `<div><b>מספר השובר הוא:</b>
                 ${gift.coupon}.${gift.numOfUsed}  
-                השובר הינו אישי ומיועד לשימוש חד פעמי
-                נשאר לכם סכום של ${gift.amount - gift.numOfUsed}`
+                <br></br>
+                <span style="background: #FAE01A;">השובר הינו אישי ומיועד לשימוש חד פעמי.</span>
+                <br></br>
+                נשאר לכם סכום של: ${gift.amount - gift.numOfUsed}</div>`
             }
             await sendMail(mailOptionsForCoupon);
         }
@@ -75,7 +79,7 @@ const createDonation = async (req, res) => {
         console.log("🚀 ~ file: donation.controller.js ~ line 10 ~ createDonation ~ campaign", campaign);
         const allCampaigns = await findAllCampaignsWithFullPopulate();
         const user = await findUserByUidWithFullPopulate(req.params.uid);
-        res.status(200).send({ campaign, donation ,allCampaigns,user});
+        res.status(200).send({ campaign, donation, allCampaigns, user });
     }
     catch (error) {
         console.log("🚀 ~ file: donation.controller.js ~ line 14 ~ createDonation ~ error", error)

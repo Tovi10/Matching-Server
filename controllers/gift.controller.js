@@ -36,9 +36,12 @@ const createGift = async (req, res) => {
             gift = { ...gift, coupon };
             const mailOptions = {
                 to: gift.from,
-                subject: 'מתנה חדשה',
-                html: `<h3>קוד השובר הוא: ${gift.coupon}</h3>
-                השוברים ייחודיים ומופיעים בצורה הבאה ${gift.coupon}.XXX [מספר ייחודי לכל שימוש בשובר].`
+                subject: '🎁 מתנה חדשה',
+                html: `<div><h3>קוד השובר הוא: ${gift.coupon}</h3>
+                השוברים ייחודיים ומופיעים בצורה הבאה: ${gift.coupon}.XXX 
+                <br></br>
+                <span style="background: #FAE01A;">מספר ייחודי לכל שימוש בשובר.</span>
+                </div>`
             }
             await sendMail(mailOptions);
         }
@@ -89,7 +92,7 @@ const deleteGift = async (req, res) => {
             if (gift.coupon) {
                 const mailOptions = {
                     to: gift.from,
-                    subject: 'נמחקה מתנה',
+                    subject: '🗑️ נמחקה מתנה',
                     html: `<h3>קוד השובר הוא: ${gift.coupon}</h3>`
                 }
                 sendMail(mailOptions);

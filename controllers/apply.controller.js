@@ -8,10 +8,11 @@ const createApply = async (req, res) => {
         const mailOptions = {
             to: 'giftmatching@gmail.com',
             subject: 'בקשה חדשה ליצירת קמפיין',
-            html: `<h3>תוכן הבקשה הוא:</h3>${apply.text}
+            html: `<h3>תוכן הבקשה הוא: ${apply.text}</h3>
+            <p>
             לצפיה בכל הבקשות אנא הכנסי לקטגוריה בקשות בקישור
             https://matching-try.herokuapp.com/management
-            http://localhost:3000/management`
+            </p>`
         }
         await sendMail(mailOptions);
         const applies = await Apply.find({}).populate({ path: 'user' }).sort({ status: 1 });
@@ -40,11 +41,13 @@ const confirmApply = async (req, res) => {
         console.log("🚀 ~ file: apply.controller.js ~ line 38 ~ confirmApply ~ editUser", editUser)
         const mailOptions = {
             to: editUser.email,
-            // to: 'giftmatching@gmail.com',
             subject: 'אושרה בקשה ליצירת קמפיין',
-            html: `ליצירת הקמפיין אנא הכנס לקטגוריה יצירת קמפיין בקישור
-            <br/>https://matching-try.herokuapp.com/management <br/>http://localhost:3000/management<br/>
-        הבקשה המאושרת היא ${apply.text}`
+            html: `<p>
+            ליצירת הקמפיין אנא הכנס לקטגוריה יצירת קמפיין בקישור:
+            <br/>
+            https://matching-try.herokuapp.com/management
+             <br/>
+        <b>הבקשה המאושרת היא:</b> ${apply.text}</p>`
         }
         await sendMail(mailOptions);
         const applies = await Apply.find({}).populate({ path: 'user' }).sort({ status: 1 });
