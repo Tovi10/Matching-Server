@@ -61,7 +61,7 @@ const updateRecruiterDetails = async (req, res) => {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 59 ~ updateRecruiterDetails ~ recruiter", recruiter);
         const mailOptions = {
             to: recruiter.user.email,
-            subject: 'מגייס חדש!🎈',
+            subject: 'מגייס חדש ! 🎈',
             html: `<h3>שלום ${recruiter.designName}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
             <p>לינק ישיר לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p>
