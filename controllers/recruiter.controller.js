@@ -64,6 +64,7 @@ const updateRecruiterDetails = async (req, res) => {
             subject: 'מגייס חדש!🎈',
             html: `<h3>שלום ${recruiter.designName}</h3>
             <p>לינק ישיר לקמפיין שלנו http://localhost:3000/current-campaign/${recruiter.campaign._id}</p>
+            <p>לינק ישיר לקמפיין שלנו https://matching-try.herokuapp.com/current-campaign/${recruiter.campaign._id}</p>
             <p>והלינק לאזור האישי שלך הוא : ${req.body.link}</p>`
         }
         sendMail(mailOptions);
@@ -95,7 +96,7 @@ const updateRecruiter = async (req, res) => {
         console.log("🚀 ~ file: recruiter.controller.js ~ line 95 ~ updateRecruiter ~ checkRecruiter", checkRecruiter)
         if (checkRecruiter.sumRaised) {
             throw Error('מגייס עם תרומות!')
-        } 
+        }
         const recruiter = await Recruiter.updateOne({ _id: req.body.recruiter }, req.body);
         console.log("🚀 ~ file: recruiter.controller.js ~ line 91 ~ updateRecruiter ~ recruiter", recruiter);
         const campaigns = await findAllCampaignsWithFullPopulate();
