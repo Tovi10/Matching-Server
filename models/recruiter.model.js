@@ -5,20 +5,28 @@ const recruiterSchema = mongoose.Schema({
         type: Number,
     },
     sumRaised: {
-        type: String,default:0
+        type: Number,
+        // initialValue: 0
+        default:0
     },
-    campaign: [{
+    designName: {
+        type: String,
+    },
+    link: {
+        type: String,
+    },
+    campaign: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Campaign',
-    }],
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // },
-    donors: [{
+    },
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Donor',
-    }],
+        ref: 'User',
+    },
+    // donors: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Donor',
+    // }],
 })
 
 module.exports = mongoose.model('Recruiter', recruiterSchema)

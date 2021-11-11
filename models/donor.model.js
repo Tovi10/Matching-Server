@@ -1,18 +1,11 @@
 const mongoose = require('mongoose');
 
 const donorSchema = mongoose.Schema({
-    adress: {
-        type: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
-    email: {
-        type: String,
-    },
-    phone: {
-        type: String,
-    },
-    name: {
-        type: String,
-    },
+  
     cards: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Card',

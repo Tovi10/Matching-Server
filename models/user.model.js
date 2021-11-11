@@ -4,12 +4,29 @@ const userSchema = mongoose.Schema({
     uid: {
         type: String,
     },
+    address: {
+        type: String,
+    },
     email: {
         type: String,
     },
-    password: {
+    phone: {
         type: String,
     },
+    name: {
+        type: String,
+    },
+    photoURL:{
+        type:String,
+    },
+    allowed:{
+        type:Boolean,
+        default:0
+    },
+    campaigns:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Campaign'
+    }],
 })
 
 module.exports = mongoose.model('User', userSchema)
