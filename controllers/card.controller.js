@@ -72,11 +72,14 @@ const updateCard = async (req, res) => {
 const deleteCard = async (req, res) => {
     try {
         const checkCard = await Card.findById(req.params.id);
+        console.log("🚀 ~ file: card.controller.js ~ line 75 ~ deleteCard ~ checkCard", checkCard)
         if (checkCard.used) {
             throw Error('הכרטיס בשימוש!')
         }
         const card = await Card.findByIdAndDelete(req.params.id);
         console.log("🚀 ~ file: card.controller.js ~ line 65 ~ deleteCard ~ card", card);
+        const campaign=await Campaign.findByIdAndUpdate(req.params.campaignId,{$pull:{cards:req.params.id}});
+        console.log("🚀 ~ file: card.controller.js ~ line 81 ~ deleteCard ~ campaign", campaign)
         const campaigns = await findAllCampaignsWithFullPopulate();
         console.log("🚀 ~ file: card.controller.js ~ line 67 ~ deleteCard ~ campaigns", campaigns)
         const user = await findUserByUidWithFullPopulate(req.params.uid);
