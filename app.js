@@ -61,9 +61,9 @@ app.get("/management", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 
-// app.get("/thank", (req, res, next) => {
-//     res.sendFile(path.join(__dirname, "./build/index.html"));
-// });
+app.get("/thank", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 app.get("&response=failure&json=eyJlcnIiOnsiaWQiOjM0MywibWVzc2FnZSI6Iteg15Ag15zXpNeg15XXqiDXnNee16DXlNecINee16LXqNeb16ogMzE0NCoifSwic3RhdHVzIjoiMCIsImRhdGEiOnsiaWQiOiIxMzcxNDc4MiIsIm5ld19wYXltZW50X2lkIjoxMzcxNDc5MX19&data_url=https://cgmpi.creditguard.co.il/CGMPI_Server/PerformTransaction", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
