@@ -19,7 +19,7 @@ const clearingCredit = (req, res) => {
             "Phone": req.body.phone,
             // "ReturnUrl": 'https://firebasestorage.googleapis.com/v0/b/matching-599f8.appspot.com/o/Campaigns%2F618a66d008342abb8852352e%2FHasdey-Naomi-charity-ZE001.jpg?alt=media&token=ee8c2f29-3c7c-45d1-bf41-26160a8a0b34',
             // "ReturnUrl": "http://localhost:3000/thank",
-            "ReturnUrl": "https://matching-try.herokuapp.com/",
+            "ReturnUrl": "https://matching-try.herokuapp.com/thank/:x",
             "Sum": req.body.sum,
             "Type": 1,
             "OrderIdClientUsage": "111222",
