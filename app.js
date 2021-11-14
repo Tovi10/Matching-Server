@@ -71,8 +71,11 @@ app.get("&response=failure&json=eyJlcnIiOnsiaWQiOjM0MywibWVzc2FnZSI6Iteg15Ag15zX
 app.get("/thank/:x*", (req, res, next) => {
     console.log('************************');
     console.log(req.url.split('&')[1].split('response=')[1])
+    if (req.url.split('&')[1].split('response=')[1] == "failure")
+        res.status(500).sendFile(path.join(__dirname, "./failure.html"));
+    else
+        res.status(200).sendFile(path.join(__dirname, "./success.html"));
     // https://matching-try.herokuapp.com/thank/4&response=failure&json=eyJlcnIiOnsiaWQiOjM0MywibWVzc2FnZSI6Iteg15Ag15zXpNeg15XXqiDXnNee16DXlNecINee16LXqNeb16ogMzE0NCoifSwic3RhdHVzIjoiMCIsImRhdGEiOnsiaWQiOiIxMzcxNTYwMSIsIm5ld19wYXltZW50X2lkIjoxMzcxNTYxMX19&data_url=https://cgmpi.creditguard.co.il/CGMPI_Server/PerformTransaction
-    res.sendFile(path.join(__dirname, "./failure.html"));
 });
 
 
