@@ -60,6 +60,21 @@ app.get("/recruiters/:recruiterId", (req, res, next) => {
 app.get("/management", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
+app.get("/management/campaigns", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/management/gifts", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/management/recruiters", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/management/cards", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+app.get("/management/applies", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 app.use('/api/campaign', campaignRouter);
 app.use('/api/gift', giftRouter);
