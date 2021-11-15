@@ -76,6 +76,22 @@ app.get("/management/applies", (req, res, next) => {
     res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 
+app.get("/thank", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+
+app.get("/failure", (req, res, next) => {
+    res.sendFile(path.join(__dirname, "./build/index.html"));
+});
+
+app.get("/thank/:x*", (req, res, next) => {
+    if (req.url.split('&')[1].split('response=')[1] == "failure")
+        res.redirect('https://matching-try.herokuapp.com/failure/')
+    else
+        res.redirect('https://matching-try.herokuapp.com/thank/')
+});
+
+
 app.use('/api/campaign', campaignRouter);
 app.use('/api/gift', giftRouter);
 app.use('/api/card', cardRouter);
