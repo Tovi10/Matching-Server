@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.41102418.chunk.css",
-    "main.js": "/static/js/main.570a2d64.chunk.js",
-    "main.js.map": "/static/js/main.570a2d64.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.376fddb2.js",
-    "runtime-main.js.map": "/static/js/runtime-main.376fddb2.js.map",
+    "main.css": "/static/css/main.5b0b41fb.chunk.css",
+    "main.js": "/static/js/main.5e71f745.chunk.js",
+    "main.js.map": "/static/js/main.5e71f745.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.537b8c7b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.537b8c7b.js.map",
     "static/css/2.786ae0dd.chunk.css": "/static/css/2.786ae0dd.chunk.css",
-    "static/js/2.bf16adfd.chunk.js": "/static/js/2.bf16adfd.chunk.js",
-    "static/js/2.bf16adfd.chunk.js.map": "/static/js/2.bf16adfd.chunk.js.map",
-    "static/js/3.730c99c5.chunk.js": "/static/js/3.730c99c5.chunk.js",
-    "static/js/3.730c99c5.chunk.js.map": "/static/js/3.730c99c5.chunk.js.map",
+    "static/js/2.9d131fd4.chunk.js": "/static/js/2.9d131fd4.chunk.js",
+    "static/js/2.9d131fd4.chunk.js.map": "/static/js/2.9d131fd4.chunk.js.map",
+    "static/js/3.5755c66e.chunk.js": "/static/js/3.5755c66e.chunk.js",
+    "static/js/3.5755c66e.chunk.js.map": "/static/js/3.5755c66e.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.786ae0dd.chunk.css.map": "/static/css/2.786ae0dd.chunk.css.map",
-    "static/css/main.41102418.chunk.css.map": "/static/css/main.41102418.chunk.css.map",
-    "static/js/2.bf16adfd.chunk.js.LICENSE.txt": "/static/js/2.bf16adfd.chunk.js.LICENSE.txt",
+    "static/css/main.5b0b41fb.chunk.css.map": "/static/css/main.5b0b41fb.chunk.css.map",
+    "static/js/2.9d131fd4.chunk.js.LICENSE.txt": "/static/js/2.9d131fd4.chunk.js.LICENSE.txt",
     "static/media/Heebo-Medium.d0da85fd.ttf": "/static/media/Heebo-Medium.d0da85fd.ttf",
     "static/media/allCampaigns.1678dfd5.svg": "/static/media/allCampaigns.1678dfd5.svg",
     "static/media/baseHome.css": "/static/media/donationSuccess.958ff783.png",
@@ -26,10 +26,10 @@
     "static/media/yourDonationWorthMore.a75aad14.png": "/static/media/yourDonationWorthMore.a75aad14.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.376fddb2.js",
+    "static/js/runtime-main.537b8c7b.js",
     "static/css/2.786ae0dd.chunk.css",
-    "static/js/2.bf16adfd.chunk.js",
-    "static/css/main.41102418.chunk.css",
-    "static/js/main.570a2d64.chunk.js"
+    "static/js/2.9d131fd4.chunk.js",
+    "static/css/main.5b0b41fb.chunk.css",
+    "static/js/main.5e71f745.chunk.js"
   ]
 }
