@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.b0ecc7a5.chunk.css",
-    "main.js": "/static/js/main.5a2eb120.chunk.js",
-    "main.js.map": "/static/js/main.5a2eb120.chunk.js.map",
+    "main.css": "/static/css/main.41102418.chunk.css",
+    "main.js": "/static/js/main.570a2d64.chunk.js",
+    "main.js.map": "/static/js/main.570a2d64.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.376fddb2.js",
     "runtime-main.js.map": "/static/js/runtime-main.376fddb2.js.map",
     "static/css/2.786ae0dd.chunk.css": "/static/css/2.786ae0dd.chunk.css",
@@ -12,14 +12,16 @@
     "static/js/3.730c99c5.chunk.js.map": "/static/js/3.730c99c5.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.786ae0dd.chunk.css.map": "/static/css/2.786ae0dd.chunk.css.map",
-    "static/css/main.b0ecc7a5.chunk.css.map": "/static/css/main.b0ecc7a5.chunk.css.map",
+    "static/css/main.41102418.chunk.css.map": "/static/css/main.41102418.chunk.css.map",
     "static/js/2.bf16adfd.chunk.js.LICENSE.txt": "/static/js/2.bf16adfd.chunk.js.LICENSE.txt",
+    "static/media/Heebo-Medium.d0da85fd.ttf": "/static/media/Heebo-Medium.d0da85fd.ttf",
     "static/media/allCampaigns.1678dfd5.svg": "/static/media/allCampaigns.1678dfd5.svg",
-    "static/media/baseHome.css": "/static/media/backgroundHomePage.2608139f.jpg",
-    "static/media/donationError.cf737c07.png": "/static/media/donationError.cf737c07.png",
-    "static/media/donationSuccess.958ff783.png": "/static/media/donationSuccess.958ff783.png",
+    "static/media/baseHome.css": "/static/media/donationSuccess.958ff783.png",
+    "static/media/index.css": "/static/media/heebo-v12-latin_hebrew-regular.a4f3b4df.woff2",
     "static/media/logoWhite.7e8e9c5c.png": "/static/media/logoWhite.7e8e9c5c.png",
+    "static/media/ourAcitvity.e66bf61f.png": "/static/media/ourAcitvity.e66bf61f.png",
     "static/media/profileInNav.7dbfd349.svg": "/static/media/profileInNav.7dbfd349.svg",
+    "static/media/base.css": "/static/media/purpleSpots.b7b596ff.gif",
     "static/media/whatToDo.6ec2dc06.png": "/static/media/whatToDo.6ec2dc06.png",
     "static/media/yourDonationWorthMore.a75aad14.png": "/static/media/yourDonationWorthMore.a75aad14.png"
   },
@@ -27,7 +29,7 @@
     "static/js/runtime-main.376fddb2.js",
     "static/css/2.786ae0dd.chunk.css",
     "static/js/2.bf16adfd.chunk.js",
-    "static/css/main.b0ecc7a5.chunk.css",
-    "static/js/main.5a2eb120.chunk.js"
+    "static/css/main.41102418.chunk.css",
+    "static/js/main.570a2d64.chunk.js"
   ]
 }
