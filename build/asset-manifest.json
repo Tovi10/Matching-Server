@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.5b0b41fb.chunk.css",
-    "main.js": "/static/js/main.5e71f745.chunk.js",
-    "main.js.map": "/static/js/main.5e71f745.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.537b8c7b.js",
-    "runtime-main.js.map": "/static/js/runtime-main.537b8c7b.js.map",
+    "main.js": "/static/js/main.c4ebc896.chunk.js",
+    "main.js.map": "/static/js/main.c4ebc896.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.c8a53156.js",
+    "runtime-main.js.map": "/static/js/runtime-main.c8a53156.js.map",
     "static/css/2.786ae0dd.chunk.css": "/static/css/2.786ae0dd.chunk.css",
-    "static/js/2.9d131fd4.chunk.js": "/static/js/2.9d131fd4.chunk.js",
-    "static/js/2.9d131fd4.chunk.js.map": "/static/js/2.9d131fd4.chunk.js.map",
-    "static/js/3.5755c66e.chunk.js": "/static/js/3.5755c66e.chunk.js",
-    "static/js/3.5755c66e.chunk.js.map": "/static/js/3.5755c66e.chunk.js.map",
+    "static/js/2.4473eeba.chunk.js": "/static/js/2.4473eeba.chunk.js",
+    "static/js/2.4473eeba.chunk.js.map": "/static/js/2.4473eeba.chunk.js.map",
+    "static/js/3.86df6979.chunk.js": "/static/js/3.86df6979.chunk.js",
+    "static/js/3.86df6979.chunk.js.map": "/static/js/3.86df6979.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.786ae0dd.chunk.css.map": "/static/css/2.786ae0dd.chunk.css.map",
     "static/css/main.5b0b41fb.chunk.css.map": "/static/css/main.5b0b41fb.chunk.css.map",
-    "static/js/2.9d131fd4.chunk.js.LICENSE.txt": "/static/js/2.9d131fd4.chunk.js.LICENSE.txt",
+    "static/js/2.4473eeba.chunk.js.LICENSE.txt": "/static/js/2.4473eeba.chunk.js.LICENSE.txt",
     "static/media/Heebo-Medium.d0da85fd.ttf": "/static/media/Heebo-Medium.d0da85fd.ttf",
     "static/media/allCampaigns.1678dfd5.svg": "/static/media/allCampaigns.1678dfd5.svg",
     "static/media/baseHome.css": "/static/media/donationSuccess.958ff783.png",
@@ -26,10 +26,10 @@
     "static/media/yourDonationWorthMore.a75aad14.png": "/static/media/yourDonationWorthMore.a75aad14.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.537b8c7b.js",
+    "static/js/runtime-main.c8a53156.js",
     "static/css/2.786ae0dd.chunk.css",
-    "static/js/2.9d131fd4.chunk.js",
+    "static/js/2.4473eeba.chunk.js",
     "static/css/main.5b0b41fb.chunk.css",
-    "static/js/main.5e71f745.chunk.js"
+    "static/js/main.c4ebc896.chunk.js"
   ]
 }
